@@ -1,4 +1,4 @@
-package deviceManager;
+package uiTextReservoir;
 
 public class UserInterfaceHelper {
     public UserInterfaceHelper(){}
