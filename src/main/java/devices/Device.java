@@ -18,10 +18,8 @@ public class Device implements IDevice {
     }
 
     public boolean checkTimer(){
-        if(this.getTimer().isRunning()){
-            return true;
-        }
-        return false;
+        boolean isrunning = this.getTimer().isRunning();
+        return isrunning;
     }
 
     public String getDeviceName() {
