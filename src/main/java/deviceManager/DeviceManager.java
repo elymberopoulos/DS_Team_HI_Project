@@ -64,7 +64,8 @@ public class DeviceManager implements IDeviceManager {
         for (Map.Entry<String, TreeMap<String, Device>> entry : this.getDeviceMap().entrySet()) {
             if (entry.getKey().equalsIgnoreCase(targetCollection) && !entry.getValue().containsKey(newKey)) {
                 device.setDeviceName(newKey);
-                entry.getValue().put(newKey, device);
+                Device obj = entry.getValue().put(newKey, device);
+                portDevices(obj);
             }
         }
     }
@@ -114,5 +115,12 @@ public class DeviceManager implements IDeviceManager {
                 this.addDevice(moveKey, placeHolder, destinationCollection);
             }
         }
+    }
+
+    public void portDevices(Device device)
+    {
+        Gson gson = new Gson();
+        String json = Gson.toJson(device);
+        //entrypoint here
     }
 }
