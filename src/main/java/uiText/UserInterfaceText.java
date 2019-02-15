@@ -1,4 +1,4 @@
-package uiTextReservoir;
+package uiText;
 
 import deviceManager.DeviceManager;
 import devices.Device;
@@ -8,10 +8,10 @@ import timer.Timer;
 
 import java.util.Scanner;
 
-public class UserInterfaceInputInvoker {
+public class UserInterfaceText {
     private DeviceManager deviceManager;
 
-    public UserInterfaceInputInvoker(DeviceManager deviceManager) {
+    public UserInterfaceText(DeviceManager deviceManager) {
         this.deviceManager = deviceManager;
     }
 
@@ -30,6 +30,7 @@ public class UserInterfaceInputInvoker {
                 System.out.print("\tDEVICE COLLECTION NAME: ");
                 String deviceCollection = scanner.nextLine().toLowerCase();
                 deviceManager.addDevice(deviceKey, newLight, deviceCollection);
+                //DatagramConnector x = new DatagramConnector(newLight);
                 //POWER STRIP INPUT
             } else if (input.contentEquals("smart power strip")) {
                 SmartPowerStrip newPower = deviceManager.generateSmartPowerStrip();
@@ -39,6 +40,7 @@ public class UserInterfaceInputInvoker {
                 System.out.print("\tDEVICE COLLECTION NAME: ");
                 String deviceCollection = scanner.nextLine().toLowerCase();
                 deviceManager.addDevice(deviceKey, newPower, deviceCollection);
+                //DatagramConnector x = new DatagramConnector(newPower);
             }
         } catch (NullPointerException e) {
             e.printStackTrace();

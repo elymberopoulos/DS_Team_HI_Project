@@ -45,6 +45,7 @@ public class Timer implements ITimer {
     public void run() {
         this.running = true;
         System.out.println("Schedule wait STARTED at: " + new Date());
+
         try{
             Thread.sleep(this.getSchedule());
             System.out.println("Schedule wait ENDED at: " + new Date());
@@ -52,6 +53,7 @@ public class Timer implements ITimer {
         catch (InterruptedException e){
             e.printStackTrace();
         }
+
         System.out.println("Device timer started at:" + new Date());
         this.running = true;
 
@@ -60,10 +62,12 @@ public class Timer implements ITimer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         this.setTime(0);
         this.setSchedule(0);
         this.running = false;
         System.out.println("Device timer finished at:" + new Date());
+
         try {
             Thread.currentThread().join();
         } catch (InterruptedException e) {

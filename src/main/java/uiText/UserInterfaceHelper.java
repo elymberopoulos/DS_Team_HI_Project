@@ -1,4 +1,4 @@
-package uiTextReservoir;
+package uiText;
 
 public class UserInterfaceHelper {
     public UserInterfaceHelper(){}

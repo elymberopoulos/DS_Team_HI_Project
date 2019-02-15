@@ -1,14 +1,11 @@
 package main;
 
+//import com.google.*;
+//import com.google.gson.Gson;
 import deviceManager.DeviceManager;
-import uiTextReservoir.UserInterfaceHelper;
-import devices.Device;
-import devices.SmartLight;
-import devices.SmartPowerStrip;
-import timer.Timer;
-import uiTextReservoir.UserInterfaceInputInvoker;
+import uiText.UserInterfaceHelper;
+import uiText.UserInterfaceText;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -20,7 +17,7 @@ public class Main {
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = deviceManager.getDeviceMap().put("power strips", new TreeMap<>());
-        UserInterfaceInputInvoker uiInvoker = new UserInterfaceInputInvoker(deviceManager);
+        UserInterfaceText uiInvoker = new UserInterfaceText(deviceManager);
         UserInterfaceHelper ui = new UserInterfaceHelper();
         ////////////////////////////////////////////////////////////////////////////////////
         System.out.println("Please enter a command");
