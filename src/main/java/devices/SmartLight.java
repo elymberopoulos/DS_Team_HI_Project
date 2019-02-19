@@ -1,5 +1,7 @@
 package devices;
 
+import datagramConnect.DatagramConnector;
+
 import java.io.IOException;
 
 public class SmartLight extends Device implements ISmartLight {
@@ -8,6 +10,7 @@ public class SmartLight extends Device implements ISmartLight {
 
     public SmartLight() throws IOException {
         this.brightness = 0;
+        DatagramConnector datagramConnector = new DatagramConnector(this);
     }
 
     @Override

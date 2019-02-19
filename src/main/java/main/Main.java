@@ -4,6 +4,7 @@ package main;
 //import com.google.gson.Gson;
 import datagramConnect.DatagramConnector;
 import deviceManager.DeviceManager;
+import devices.Device;
 import uiText.UserInterfaceHelper;
 import uiText.UserInterfaceText;
 
@@ -16,7 +17,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        DatagramConnector client = new DatagramConnector();
+        //DatagramConnector client = new DatagramConnector();
+
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
@@ -78,7 +80,7 @@ public class Main {
                     ui.help();
                     break;
                 case "msg":
-                     client.sendEcho("pinging");
+                     //client.sendEcho("pinging");
                      break;
 
                 case "exit":

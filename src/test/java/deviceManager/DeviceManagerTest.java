@@ -5,6 +5,7 @@ import devices.SmartLight;
 import devices.SmartPowerStrip;
 //import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -67,7 +68,12 @@ public class DeviceManagerTest {
     @Test
     public  void generateSmartBulb() {
         DeviceManager d = new DeviceManager();
-        SmartLight light = d.generateSmartBulb();
+        SmartLight light = null;
+        try {
+            light = d.generateSmartBulb();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertNotNull(light);
         assertTrue(light instanceof SmartLight);
     }
@@ -75,7 +81,12 @@ public class DeviceManagerTest {
     @Test
     public  void generateSmartPowerStrip() {
         DeviceManager d = new DeviceManager();
-        SmartPowerStrip powerStrip = d.generateSmartPowerStrip();
+        SmartPowerStrip powerStrip = null;
+        try {
+            powerStrip = d.generateSmartPowerStrip();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertNotNull(powerStrip);
         assertTrue(powerStrip instanceof SmartPowerStrip);
     }
@@ -94,8 +105,18 @@ public class DeviceManagerTest {
 
         Map lights = dm.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = dm.getDeviceMap().put("power strips", new TreeMap<>());
-        SmartLight smartLight = new SmartLight();
-        SmartPowerStrip powerStrip = new SmartPowerStrip();
+        SmartLight smartLight = null;
+        try {
+            smartLight = new SmartLight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SmartPowerStrip powerStrip = null;
+        try {
+            powerStrip = new SmartPowerStrip();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         dm.addDevice("light", smartLight, "lights");
@@ -114,8 +135,18 @@ public class DeviceManagerTest {
 
         Map lights = dm.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = dm.getDeviceMap().put("power strips", new TreeMap<>());
-        SmartLight smartLight = new SmartLight();
-        SmartPowerStrip powerStrip = new SmartPowerStrip();
+        SmartLight smartLight = null;
+        try {
+            smartLight = new SmartLight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SmartPowerStrip powerStrip = null;
+        try {
+            powerStrip = new SmartPowerStrip();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         dm.addDevice("light", smartLight, "lights");
@@ -140,8 +171,18 @@ public class DeviceManagerTest {
 
         Map lights = dm.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = dm.getDeviceMap().put("power strips", new TreeMap<>());
-        SmartLight smartLight = new SmartLight();
-        SmartPowerStrip powerStrip = new SmartPowerStrip();
+        SmartLight smartLight = null;
+        try {
+            smartLight = new SmartLight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SmartPowerStrip powerStrip = null;
+        try {
+            powerStrip = new SmartPowerStrip();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         dm.addDevice("light", smartLight, "lights");
