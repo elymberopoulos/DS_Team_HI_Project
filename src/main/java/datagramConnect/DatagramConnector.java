@@ -49,21 +49,21 @@ public class DatagramConnector implements Runnable {
                 }
 
                 Thread.sleep(1500);
-                if (!socket.isConnected()) {
-                    pingReminder++;
-                    exitCounter++;
-                    if (exitCounter == 40) {
-                        System.out.println("Ping thread dying");
-                        System.out.println("Dying Device: " + this.getAttachedDevice().getDeviceName());
-                        this.ping.join();
-                    }
-                    if (pingReminder == 10) {
-                        pingReminder = 0;
-                        System.out.println("REMINDER OF DEVICE-NAME: " + this.getAttachedDevice().getDeviceName());
-                        System.out.println("Host address: " + request.getAddress().getHostAddress());
-                        System.out.println("Port number: " + request.getPort());
-                    }
-                }
+//                if (!socket.isConnected()) {
+//                    pingReminder++;
+//                    exitCounter++;
+//                    if (exitCounter == 40) {
+//                        System.out.println("Ping thread dying");
+//                        System.out.println("Dying Device: " + this.getAttachedDevice().getDeviceName());
+//                        this.ping.join();
+//                    }
+//                    if (pingReminder == 10) {
+//                        pingReminder = 0;
+//                        System.out.println("REMINDER OF DEVICE-NAME: " + this.getAttachedDevice().getDeviceName());
+//                        System.out.println("Host address: " + request.getAddress().getHostAddress());
+//                        System.out.println("Port number: " + request.getPort());
+//                    }
+//                }
             }
 
         } catch (SocketTimeoutException ex) {

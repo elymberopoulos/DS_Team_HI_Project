@@ -12,7 +12,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-
+        //Gson gson = new Gson();
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
