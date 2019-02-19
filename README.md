@@ -3,12 +3,12 @@
  The purpose of this project is to simulate IOT.  IOT is utilized in many
  everyday appliances and devices.  These devices are always available
  through the network.  This project will support smart devices, such as lightbulbs
- and smart outlets / powerstrips, and other smart devices.
+ and smart outlets / powerstrips, and other smart devices.  As this application is updated with other functionality.  We will continue updating the readme file.
  
  The goal of the project is to implement software that will allow us to
  add and remove devices.  It will also allow us to view their current state,
  and creating smart instances, or implementing a timer for automatic power on 
- and power off.  
+ and power off.  More information is available by reading further.
  
  ## What is IOT:
  IOT is a technology that enables devices to connect via the internet.  As it is called
