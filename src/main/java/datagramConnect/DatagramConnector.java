@@ -1,14 +1,17 @@
 package datagramConnect;
 
 import devices.Device;
+import devices.SmartLight;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.Arrays;
 import java.util.Date;
 
-public class DatagramConnector implements Runnable {
+/*public class DatagramConnector implements Runnable {
     private Device attachedDevice;
     private Thread ping;
+    private int port;
 
 
     public DatagramConnector(Device attachedDevice) {
@@ -17,10 +20,16 @@ public class DatagramConnector implements Runnable {
         ping.start();
     }
 
+    public DatagramConnector()
+    {
+
+    }
+
 
     public Thread getPing() {
         return ping;
     }
+
 
     public Device getAttachedDevice() {
         return attachedDevice;
@@ -32,11 +41,12 @@ public class DatagramConnector implements Runnable {
             DatagramSocket socket = new DatagramSocket();
             InetAddress localAddress = InetAddress.getLocalHost();
             int localPort = socket.getLocalPort();
+            setPort(localPort);
             socket.setSoTimeout(30000);
             int pingReminder = 0;
             int exitCounter = 0;
             while (true) {
-                DatagramPacket request = new DatagramPacket(new byte[1], 1, localAddress, localPort);
+                DatagramPacket request = new DatagramPacket(new byte[1], 1, localAddress, 4444);
 
                 socket.send(request);
 
@@ -76,6 +86,54 @@ public class DatagramConnector implements Runnable {
             ex.printStackTrace();
         }
     }
+
+    public void setPort(int port)
+    {
+        this.port = port;
+    }
+
+    public int getPort()
+    {
+        return port;
+    }
+
+}*/
+
+public class DatagramConnector {
+    private DatagramSocket clientSocket;
+    private InetAddress address;
+    private Device attachedDevice;
+    public static int port;
+    private boolean isConnected;
+    private DatagramPacket packet;
+    private byte[] buf = new byte[1024];
+
+    public DatagramConnector() throws IOException {
+        clientSocket = new DatagramSocket();
+        address = InetAddress.getByName("localhost");
+        isConnected = clientSocket.isConnected();
+        this.attachedDevice = attachedDevice;
+
+
+    }
+
+    public void sendEcho(String test) throws IOException {
+
+        buf = test.getBytes();
+        packet = new DatagramPacket(buf, buf.length, address, 41234);
+        clientSocket.send(packet);
+        packet = new DatagramPacket(buf, buf.length);
+        //clientSocket.close();
+        //clientSocket.receive(packet);
+        //String received = new String(packet.getData(), 0, packet.getLength());
+        //return received;
+    }
+
+    public void close() {
+        clientSocket.close();
+    }
+
+
 }
 
 

@@ -2,6 +2,7 @@ package deviceManager;
 
 import devices.Device;
 
+import java.io.IOException;
 import java.util.TreeMap;
 
 public interface IDeviceManager {
