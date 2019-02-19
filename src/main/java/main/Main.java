@@ -1,26 +1,27 @@
 package main;
 
+//import com.google.*;
+//import com.google.gson.Gson;
+import datagramConnect.DatagramConnector;
 import deviceManager.DeviceManager;
-import uiTextReservoir.UserInterfaceHelper;
-import devices.Device;
-import devices.SmartLight;
-import devices.SmartPowerStrip;
-import timer.Timer;
-import uiTextReservoir.UserInterfaceInputInvoker;
+import uiText.UserInterfaceHelper;
+import uiText.UserInterfaceText;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.*;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+
+        DatagramConnector client = new DatagramConnector();
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = deviceManager.getDeviceMap().put("power strips", new TreeMap<>());
-        UserInterfaceInputInvoker uiInvoker = new UserInterfaceInputInvoker(deviceManager);
+        UserInterfaceText uiInvoker = new UserInterfaceText(deviceManager);
         UserInterfaceHelper ui = new UserInterfaceHelper();
         ////////////////////////////////////////////////////////////////////////////////////
         System.out.println("Please enter a command");
@@ -76,6 +77,10 @@ public class Main {
                 case "help":
                     ui.help();
                     break;
+                case "msg":
+                     client.sendEcho("pinging");
+                     break;
+
                 case "exit":
                     System.exit(0);
 

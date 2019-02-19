@@ -1,6 +1,15 @@
 package devices;
 
-public class SmartPowerStrip extends Device implements ISmartPower {
-    public SmartPowerStrip() {
-    }
+import timer.Timer;
+
+import java.io.IOException;
+
+public class SmartPowerStrip extends Device {
+    public SmartPowerStrip() throws IOException {
+
+
+  }
+
 }
+
+

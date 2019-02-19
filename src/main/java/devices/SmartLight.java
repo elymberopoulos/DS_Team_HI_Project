@@ -1,10 +1,12 @@
 package devices;
 
+import java.io.IOException;
+
 public class SmartLight extends Device implements ISmartLight {
 
     private int brightness;
 
-    public SmartLight() {
+    public SmartLight() throws IOException {
         this.brightness = 0;
     }
 

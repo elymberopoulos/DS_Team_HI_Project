@@ -4,6 +4,7 @@ import devices.Device;
 import devices.SmartLight;
 import devices.SmartPowerStrip;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,11 +18,11 @@ public class DeviceManager implements IDeviceManager {
         this.deviceMap = new TreeMap<String, TreeMap<String, Device>>();
     }
 
-    public SmartLight generateSmartBulb() {
+    public SmartLight generateSmartBulb() throws IOException {
         return new SmartLight();
     }
 
-    public SmartPowerStrip generateSmartPowerStrip() {
+    public SmartPowerStrip generateSmartPowerStrip() throws IOException {
         return new SmartPowerStrip();
     }
 
@@ -64,8 +65,7 @@ public class DeviceManager implements IDeviceManager {
         for (Map.Entry<String, TreeMap<String, Device>> entry : this.getDeviceMap().entrySet()) {
             if (entry.getKey().equalsIgnoreCase(targetCollection) && !entry.getValue().containsKey(newKey)) {
                 device.setDeviceName(newKey);
-                Device obj = entry.getValue().put(newKey, device);
-                portDevices(obj);
+
             }
         }
     }
@@ -107,7 +107,7 @@ public class DeviceManager implements IDeviceManager {
         return null;
     }
 
-    public void moveDevice(String moveKey, String targetCollection, String destinationCollection) {
+    public void moveDevice(String moveKey, String targetCollection, String destinationCollection){
         Device placeHolder;
         for (Map.Entry<String, TreeMap<String, Device>> entry : this.getDeviceMap().entrySet()) {
             if (entry.getKey().equalsIgnoreCase(targetCollection) && entry.getValue().containsKey(moveKey)) {
@@ -117,10 +117,5 @@ public class DeviceManager implements IDeviceManager {
         }
     }
 
-    public void portDevices(Device device)
-    {
-        Gson gson = new Gson();
-        String json = Gson.toJson(device);
-        //entrypoint here
-    }
+
 }
