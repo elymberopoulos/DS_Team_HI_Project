@@ -18,6 +18,11 @@
  Devices can range from cameras, to dvd players, or lightbulbs and other devices that are not normally wired for internet use.
  Another great aspect is that the data that will be collected could be extremely valuable to people.  It could give us better
  understandings how the internet works and what we can do with it.
+ 
+ ## Functionality:
+ The overall functionality of the project thus far is to add devices by user choice.  Thus adding the device.  The user is able to 
+ run a multitude of commands that perform various options.  The devices themselves such as a smart lightbulb, can theoretically work if there is no network.  For instance, plugging in an lightbulb without any network what so ever, will power the device, since the device would already be plugged in.  It is the connectivity from the device that gives us the extra options , since its a smart device.  This application can also work with other devices as well.  For now , with the current project, we are only sticking with lightbulbs and power switches.
+ 
 
 -----------------------------------------------------------------------------------------------------------------------------
 ## Directions:
@@ -190,3 +195,7 @@ VALID COMMANDS:
 ```
 "Exits the program"
 ```
+-----------------------------------------
+
+## Node JS
+
