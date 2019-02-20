@@ -3,10 +3,7 @@ package datagramConnect;
 import devices.Device;
 import devices.SmartLight;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.*;
 import java.util.Arrays;
 import java.util.Date;
@@ -102,7 +99,7 @@ import java.util.Date;
 
 }*/
 
-public class DatagramConnector {
+public class DatagramConnector implements Serializable {
     private DatagramSocket clientSocket;
     private InetAddress address;
     private Device attachedDevice;
@@ -110,26 +107,28 @@ public class DatagramConnector {
     private boolean isConnected;
     private DatagramPacket packet;
     private byte[] buf = new byte[1024];
+    private byte[] objByte = new byte[1024];
 
     public DatagramConnector(Device attachedDevice) throws IOException {
         clientSocket = new DatagramSocket();
         address = InetAddress.getByName("localhost");
         isConnected = clientSocket.isConnected();
         this.attachedDevice = attachedDevice;
-        this.sendEcho("Device name: " + attachedDevice.getDeviceName() + " " + attachedDevice.toString());
+//        this.sendEcho("Device name: " + attachedDevice.getDeviceName() + " " + attachedDevice.toString());
+        this.sendEcho(this.objToByte(attachedDevice));
 
 
     }
 
-    private byte[] objToByte(Device device) {
+    private byte[] objToByte(Device device)  {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out = null;
         try {
             out = new ObjectOutputStream(bos);
             out.writeObject(device);
             out.flush();
-            byte[] yourBytes = bos.toByteArray();
-            return yourBytes;
+            objByte = bos.toByteArray();
+            return objByte;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -142,9 +141,9 @@ public class DatagramConnector {
         return null;
     }
 
-    public void sendEcho(String test) throws IOException {
+    public void sendEcho(byte[] test) throws IOException {
 
-        buf = test.getBytes();
+        buf = test;
         packet = new DatagramPacket(buf, buf.length, address, 41234);
         clientSocket.send(packet);
         packet = new DatagramPacket(buf, buf.length);
