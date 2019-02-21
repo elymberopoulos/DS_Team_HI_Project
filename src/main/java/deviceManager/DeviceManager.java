@@ -64,7 +64,9 @@ public class DeviceManager implements IDeviceManager {
     public void addDevice(String newKey, Device device, String targetCollection) {
         for (Map.Entry<String, TreeMap<String, Device>> entry : this.getDeviceMap().entrySet()) {
             if (entry.getKey().equalsIgnoreCase(targetCollection) && !entry.getValue().containsKey(newKey)) {
+                //checks that key is not a duplicate
                 device.setDeviceName(newKey);
+                entry.getValue().put(newKey,device);
 
             }
         }

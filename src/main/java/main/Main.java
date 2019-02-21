@@ -4,6 +4,7 @@ package main;
 //import com.google.gson.Gson;
 import datagramConnect.DatagramConnector;
 import deviceManager.DeviceManager;
+import devices.Device;
 import uiText.UserInterfaceHelper;
 import uiText.UserInterfaceText;
 
@@ -13,10 +14,13 @@ import java.util.*;
 
 public class Main {
 
+
     public static void main(String[] args) throws IOException {
 
 
-        DatagramConnector client = new DatagramConnector();
+
+        Device device = new Device();
+        DatagramConnector dc = new DatagramConnector();
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
@@ -27,6 +31,7 @@ public class Main {
         System.out.println("Please enter a command");
         Scanner scanner = new Scanner(System.in);
         do {
+
             System.out.println("Type 'help' if needed.");
             String commandInput = scanner.nextLine().toLowerCase();
 
@@ -77,10 +82,6 @@ public class Main {
                 case "help":
                     ui.help();
                     break;
-                case "msg":
-                     client.sendEcho("pinging");
-                     break;
-
                 case "exit":
                     System.exit(0);
 

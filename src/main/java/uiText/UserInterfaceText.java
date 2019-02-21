@@ -30,7 +30,6 @@ public class UserInterfaceText {
                 System.out.print("\tDEVICE COLLECTION NAME: ");
                 String deviceCollection = scanner.nextLine().toLowerCase();
                 deviceManager.addDevice(deviceKey, newLight, deviceCollection);
-                //DatagramConnector x = new DatagramConnector(newLight);
                 //POWER STRIP INPUT
             } else if (input.contentEquals("smart power strip")) {
                 SmartPowerStrip newPower = deviceManager.generateSmartPowerStrip();

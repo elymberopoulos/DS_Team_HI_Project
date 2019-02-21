@@ -18,6 +18,7 @@ public class Device implements IDevice {
         this.deviceName = null;
         this.powerSwitch = false;
         this.timer = new Timer(0, this);
+        this.datagramConnector = new DatagramConnector(this);
     }
 
     public DatagramConnector getDatagramConnector() {

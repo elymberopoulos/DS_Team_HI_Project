@@ -8,16 +8,17 @@ import java.net.*;
 import java.util.Arrays;
 import java.util.Date;
 
-/*public class DatagramConnector implements Runnable {
+public class DatagramConnector{
     private Device attachedDevice;
     private Thread ping;
     private int port;
+    private byte[] deviceBuf = new byte[256];
 
 
     public DatagramConnector(Device attachedDevice) {
+
         this.attachedDevice = attachedDevice;
-        this.ping = new Thread(this);
-        ping.start();
+
     }
 
     public DatagramConnector()
@@ -25,31 +26,27 @@ import java.util.Date;
 
     }
 
-
-    public Thread getPing() {
-        return ping;
-    }
-
-
     public Device getAttachedDevice() {
         return attachedDevice;
     }
 
-    public void run() {
+    public void sendDevice(String device) {
         try {
 
             DatagramSocket socket = new DatagramSocket();
-            InetAddress localAddress = InetAddress.getLocalHost();
+            //InetAddress localAddress = InetAddress.getLocalHost();
+            InetAddress targetAddress = InetAddress.getByName("localhost");
             int localPort = socket.getLocalPort();
             setPort(localPort);
             socket.setSoTimeout(30000);
             int pingReminder = 0;
             int exitCounter = 0;
             while (true) {
-                DatagramPacket request = new DatagramPacket(new byte[1], 1, localAddress, 4444);
 
-                socket.send(request);
 
+                deviceBuf = device.getBytes();
+                DatagramPacket packet = new DatagramPacket(deviceBuf, deviceBuf.length , targetAddress, 41234);
+                socket.send(packet);
                 byte[] buffer = new byte[512];
                 DatagramPacket response = new DatagramPacket(buffer, buffer.length);
                 try {
@@ -64,14 +61,14 @@ import java.util.Date;
                     exitCounter++;
                     if (exitCounter == 40) {
                         System.out.println("Ping thread dying");
-                        System.out.println("Dying Device: " + this.getAttachedDevice().getDeviceName());
+                       // System.out.println("Dying Device: " + this.getAttachedDevice().getDeviceName());
                         this.ping.join();
                     }
                     if (pingReminder == 10) {
                         pingReminder = 0;
-                        System.out.println("REMINDER OF DEVICE-NAME: " + this.getAttachedDevice().getDeviceName());
-                        System.out.println("Host address: " + request.getAddress().getHostAddress());
-                        System.out.println("Port number: " + request.getPort());
+                        //System.out.println("REMINDER OF DEVICE-NAME: " + this.getAttachedDevice().getDeviceName());
+                        //System.out.println("Host address: " + request.getAddress().getHostAddress());
+                        //System.out.println("Port number: " + request.getPort());
                     }
                 }
             }
@@ -96,43 +93,6 @@ import java.util.Date;
     {
         return port;
     }
-
-}*/
-
-public class DatagramConnector {
-    private DatagramSocket clientSocket;
-    private InetAddress address;
-    private Device attachedDevice;
-    public static int port;
-    private boolean isConnected;
-    private DatagramPacket packet;
-    private byte[] buf = new byte[1024];
-
-    public DatagramConnector() throws IOException {
-        clientSocket = new DatagramSocket();
-        address = InetAddress.getByName("localhost");
-        isConnected = clientSocket.isConnected();
-        this.attachedDevice = attachedDevice;
-
-
-    }
-
-    public void sendEcho(String test) throws IOException {
-
-        buf = test.getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, 41234);
-        clientSocket.send(packet);
-        packet = new DatagramPacket(buf, buf.length);
-        //clientSocket.close();
-        //clientSocket.receive(packet);
-        //String received = new String(packet.getData(), 0, packet.getLength());
-        //return received;
-    }
-
-    public void close() {
-        clientSocket.close();
-    }
-
 
 }
 
