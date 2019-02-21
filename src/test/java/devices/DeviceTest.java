@@ -4,6 +4,7 @@ import deviceManager.DeviceManager;
 //import org.junit.jupiter.api.Test;
 import timer.Timer;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,7 +71,12 @@ public class DeviceTest {
 
     @Test
     public  void getDeviceName() {
-        SmartLight l = new SmartLight();
+        SmartLight l = null;
+        try {
+            l = new SmartLight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         DeviceManager dm = new DeviceManager();
         Map lights = dm.getDeviceMap().put("lights", new TreeMap<>());
         Map powerStrips = dm.getDeviceMap().put("power strips", new TreeMap<>());
@@ -81,7 +87,12 @@ public class DeviceTest {
 
     @Test
     public   void setDeviceName() {
-        SmartLight l = new SmartLight();
+        SmartLight l = null;
+        try {
+            l = new SmartLight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertNotEquals("name", l.getDeviceName());
         l.setDeviceName("name");
         assertEquals("name", l.getDeviceName());

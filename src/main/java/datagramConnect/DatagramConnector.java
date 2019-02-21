@@ -3,96 +3,70 @@ package datagramConnect;
 import devices.Device;
 import devices.SmartLight;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.Arrays;
 import java.util.Date;
 
-public class DatagramConnector{
+
+public class DatagramConnector implements Serializable {
+    private DatagramSocket clientSocket;
+    private InetAddress address;
     private Device attachedDevice;
-    private Thread ping;
-    private int port;
-    private byte[] deviceBuf = new byte[256];
+    public static int port;
+    private boolean isConnected;
+    private DatagramPacket packet;
+    private byte[] buf = new byte[1024];
+    private byte[] objByte = new byte[1024];
 
-
-    public DatagramConnector(Device attachedDevice) {
-
+    public DatagramConnector(Device attachedDevice) throws IOException {
+        clientSocket = new DatagramSocket();
+        address = InetAddress.getByName("localhost");
+        isConnected = clientSocket.isConnected();
         this.attachedDevice = attachedDevice;
+//        this.sendEcho("Device name: " + attachedDevice.getDeviceName() + " " + attachedDevice.toString());
+        this.sendEcho(this.objToByte(attachedDevice));
+
 
     }
 
-    public DatagramConnector()
-    {
-
-    }
-
-    public Device getAttachedDevice() {
-        return attachedDevice;
-    }
-
-    public void sendDevice(String device) {
+    private byte[] objToByte(Device device)  {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
         try {
-
-            DatagramSocket socket = new DatagramSocket();
-            //InetAddress localAddress = InetAddress.getLocalHost();
-            InetAddress targetAddress = InetAddress.getByName("localhost");
-            int localPort = socket.getLocalPort();
-            setPort(localPort);
-            socket.setSoTimeout(30000);
-            int pingReminder = 0;
-            int exitCounter = 0;
-            while (true) {
-
-
-                deviceBuf = device.getBytes();
-                DatagramPacket packet = new DatagramPacket(deviceBuf, deviceBuf.length , targetAddress, 41234);
-                socket.send(packet);
-                byte[] buffer = new byte[512];
-                DatagramPacket response = new DatagramPacket(buffer, buffer.length);
-                try {
-                    socket.receive(response);
-                } catch (SocketTimeoutException ste) {
-                    System.out.println("Timeout awaiting response...");
-                }
-
-                Thread.sleep(1500);
-                if (!socket.isConnected()) {
-                    pingReminder++;
-                    exitCounter++;
-                    if (exitCounter == 40) {
-                        System.out.println("Ping thread dying");
-                       // System.out.println("Dying Device: " + this.getAttachedDevice().getDeviceName());
-                        this.ping.join();
-                    }
-                    if (pingReminder == 10) {
-                        pingReminder = 0;
-                        //System.out.println("REMINDER OF DEVICE-NAME: " + this.getAttachedDevice().getDeviceName());
-                        //System.out.println("Host address: " + request.getAddress().getHostAddress());
-                        //System.out.println("Port number: " + request.getPort());
-                    }
-                }
+            out = new ObjectOutputStream(bos);
+            out.writeObject(device);
+            out.flush();
+            objByte = bos.toByteArray();
+            return objByte;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bos.close();
+            } catch (IOException ex) {
+                // ignore close exception
             }
-
-        } catch (SocketTimeoutException ex) {
-            System.out.println("Timeout error: " + ex.getMessage());
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            System.out.println("Client error: " + ex.getMessage());
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
         }
+        return null;
     }
 
-    public void setPort(int port)
-    {
-        this.port = port;
+    public void sendEcho(byte[] test) throws IOException {
+
+        buf = test;
+        packet = new DatagramPacket(buf, buf.length, address, 41234);
+        clientSocket.send(packet);
+        packet = new DatagramPacket(buf, buf.length);
+        //clientSocket.close();
+        //clientSocket.receive(packet);
+        //String received = new String(packet.getData(), 0, packet.getLength());
+        //return received;
     }
 
-    public int getPort()
-    {
-        return port;
+    public void close() {
+        clientSocket.close();
     }
+
 
 }
 

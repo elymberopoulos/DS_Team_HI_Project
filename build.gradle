@@ -1,6 +1,9 @@
 plugins {
     id 'java'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5c3ae7333beb68caf98084244578ff1f9c8a63f8
 }
 
 version '1.0-SNAPSHOT'
@@ -29,5 +32,10 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+<<<<<<< HEAD
 //    implementation 'com.google.code.gson:gson:2.8.5'
 }
+=======
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+}
+>>>>>>> 5c3ae7333beb68caf98084244578ff1f9c8a63f8

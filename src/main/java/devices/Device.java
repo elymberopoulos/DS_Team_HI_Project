@@ -4,10 +4,11 @@ import datagramConnect.DatagramConnector;
 import timer.Timer;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Device implements IDevice {
+public class Device implements IDevice, Serializable {
     private String deviceName;
     private boolean powerSwitch;
     private Timer timer;

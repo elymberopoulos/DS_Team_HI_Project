@@ -18,9 +18,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
+<<<<<<< HEAD
 
         Device device = new Device();
         DatagramConnector dc = new DatagramConnector();
+=======
+        //DatagramConnector client = new DatagramConnector();
+
+>>>>>>> 5c3ae7333beb68caf98084244578ff1f9c8a63f8
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
@@ -82,6 +87,13 @@ public class Main {
                 case "help":
                     ui.help();
                     break;
+<<<<<<< HEAD
+=======
+                case "msg":
+                     //client.sendEcho("pinging");
+                     break;
+
+>>>>>>> 5c3ae7333beb68caf98084244578ff1f9c8a63f8
                 case "exit":
                     System.exit(0);
 

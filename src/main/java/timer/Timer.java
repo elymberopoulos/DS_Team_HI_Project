@@ -2,9 +2,10 @@ package timer;
 
 import devices.Device;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Timer implements ITimer {
+public class Timer implements ITimer, Serializable {
 
     private int time;
     private boolean running;
