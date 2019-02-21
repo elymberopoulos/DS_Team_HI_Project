@@ -1,8 +1,8 @@
 package main;
 
-//import com.google.*;
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 import deviceManager.DeviceManager;
+import devices.Device;
 import uiText.UserInterfaceHelper;
 import uiText.UserInterfaceText;
 
@@ -12,7 +12,11 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        //Gson gson = new Gson();
+
+        Gson gson = new Gson();
+        Device device = new Device();
+        System.out.println(gson.toJson(device));
+
         ThreadGroup threadGroup = new ThreadGroup("timers");
         DeviceManager deviceManager = new DeviceManager();
         Map lights = deviceManager.getDeviceMap().put("lights", new TreeMap<>());
